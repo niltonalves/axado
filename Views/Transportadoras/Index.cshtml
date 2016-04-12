@@ -1,0 +1,53 @@
+﻿@model IEnumerable<Transportadora.Models.Transportadora>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Transportadoras</h2>
+
+<p style="float:right">
+    @Html.ActionLink("Nova transportadora", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.RazaoSocial)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NomeFantasia)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CNPJ)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DataCadastro)
+        </th>
+       
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.RazaoSocial)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NomeFantasia)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CNPJ)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DataCadastro)
+        </td>
+        
+        <td>
+            @Html.ActionLink("Editar", "Edit", new { id=item.ID }) |
+            @Html.ActionLink("Deletar", "Delete", new { id=item.ID })
+        </td>
+    </tr>
+}
+
+</table>

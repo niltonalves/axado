@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="AxadoModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Categoria">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="IdUsuarioCadastro" Type="int" Nullable="false" />
+    <Property Name="Nome" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Transportadora">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IdCategoria" Type="int" Nullable="false" />
+    <Property Name="IdUsuarioCadastro" Type="int" Nullable="false" />
+    <Property Name="RazaoSocial" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="NomeFantasia" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="CNPJ" Type="nvarchar" MaxLength="18" Nullable="false" />
+    <Property Name="DataCadastro" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Usuario">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Email" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="Senha" Type="nvarchar" MaxLength="100" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_Categoria_Usuario">
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+    <End Role="Categoria" Type="Self.Categoria" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Categoria">
+        <PropertyRef Name="IdUsuarioCadastro" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Transportadora_Categoria">
+    <End Role="Categoria" Type="Self.Categoria" Multiplicity="1" />
+    <End Role="Transportadora" Type="Self.Transportadora" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Categoria">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Transportadora">
+        <PropertyRef Name="IdCategoria" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Transportadora_Usuario">
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+    <End Role="Transportadora" Type="Self.Transportadora" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Transportadora">
+        <PropertyRef Name="IdCategoria" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="AxadoModelStoreContainer">
+    <EntitySet Name="Categoria" EntityType="Self.Categoria" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Transportadora" EntityType="Self.Transportadora" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Categoria_Usuario" Association="Self.FK_Categoria_Usuario">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="Categoria" EntitySet="Categoria" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Transportadora_Categoria" Association="Self.FK_Transportadora_Categoria">
+      <End Role="Categoria" EntitySet="Categoria" />
+      <End Role="Transportadora" EntitySet="Transportadora" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Transportadora_Usuario" Association="Self.FK_Transportadora_Usuario">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="Transportadora" EntitySet="Transportadora" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
