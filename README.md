@@ -9,3 +9,7 @@ Este documento possui passo de configuração do site. Veja as instruções abai
 5 -> Abra o site no navegador e verifique se a instalação ocorreu corretamente. Caso sim, utilize os dados de acesso abaixo:<br>
 	Usuário: admin@axado.com.br e senha: teste<br>
 6 -> Utilize as telas de transportadoras e categorias para realizar a administração do site.<br>
+
+<br>
+Duvidas ou sugestão encaminhe para o seguinte e-mail: nil.alvesjr@gmail.com
+
